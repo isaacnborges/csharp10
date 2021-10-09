@@ -14,7 +14,7 @@ app.UseSwaggerUI();
 app.MapGet("/todos", (ToDoContext context) => {
     var todos = context.ToDos.ToList();
     return Results.Ok(todos);
-});
+}).Produces<List<ToDo>>();
 
 app.MapGet("/todos/{id}", (ToDoContext context, Guid id) => {
     var todo = GetTodo(context, id);
@@ -23,7 +23,7 @@ app.MapGet("/todos/{id}", (ToDoContext context, Guid id) => {
         return Results.NotFound("Not found");
 
     return Results.Ok(todo);
-});
+}).Produces<ToDo>();
 
 app.MapPost("/todos", (ToDoContext context, ToDoDto dto) =>
 {
